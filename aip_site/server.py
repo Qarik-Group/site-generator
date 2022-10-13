@@ -89,6 +89,10 @@ def site_load_func(src: str):
     def fx():
         flask.g.site = Site.load(src)
 
+        # This is a workaround as we currently do not serve a static site.
+        if os.environ.get('FLASK_ENV', "development") == "production":
+            return
+
         # This is the dev server, so plow over whatever the configuration
         # says that the site URL is.
         flask.g.site.config.setdefault('urls', {})
