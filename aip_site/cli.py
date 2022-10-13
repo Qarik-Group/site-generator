@@ -15,6 +15,7 @@
 from __future__ import annotations
 
 import click
+import os
 
 from aip_site import server
 from aip_site.publisher import Publisher
@@ -47,4 +48,4 @@ def publish(src: str, dest: str):
 def serve(src: str):
     """Run a debug server."""
     server.app.before_request(server.site_load_func(src))
-    server.app.run(host='0.0.0.0', port=4000, debug=True)
+    server.app.run(host='0.0.0.0', port=os.environ.get('PORT', 4000), debug=True)
