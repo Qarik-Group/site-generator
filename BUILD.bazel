@@ -1,0 +1,40 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+
+filegroup(
+    name = "data",
+    srcs = glob([
+        "aip_site/support/assets/js/**/*.js",
+        "aip_site/support/scss/**/*.scss",
+        "aip_site/support/templates/**/*.j2",
+    ]) + [
+        "aip_site/support/assets/favicon.ico",
+        "aip_site/support/assets/images/glue-icons.svg",
+        "aip_site/support/assets/images/github.png",
+    ] + [
+        "VERSION",
+        "README.md",
+    ],
+)
+
+py_binary(
+    name = "aip-site-generator",
+    srcs = glob(["aip_site/**/*.py"]) + ["site-publish.py"],
+    data = [":data"],
+    main = "site-publish.py",
+    deps = [
+        requirement("click"),
+        requirement("flask"),
+        requirement("itsdangerous"),
+        requirement("jinja2"),
+        requirement("markdown"),
+        requirement("markupsafe"),
+        requirement("pygments"),
+        requirement("pymdown-extensions"),
+        requirement("pyscss"),
+        requirement("pyyaml"),
+        requirement("six"),
+        requirement("types-Markdown"),
+        requirement("types-PyYAML"),
+        requirement("werkzeug"),
+    ],
+)
