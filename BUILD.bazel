@@ -17,10 +17,11 @@ filegroup(
 )
 
 py_binary(
-    name = "aip-site-generator",
-    srcs = glob(["aip_site/**/*.py"]) + ["site-publish.py"],
+    name = "site-generator",
+    srcs = glob(["aip_site/**/*.py"]) + ["//internal:main.py"],
     data = [":data"],
-    main = "site-publish.py",
+    main = "//internal:main.py",
+    visibility = ["//visibility:public"],
     deps = [
         requirement("click"),
         requirement("flask"),
