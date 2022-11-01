@@ -30,7 +30,7 @@ def _aip_site_build_impl(ctx):
     ctx.actions.run(
         inputs = [workdir],
         outputs = [site],
-        arguments = ["publish", workdir.path + "/" + paths.dirname(ctx.build_file_path), site.short_path],
+        arguments = ["publish", workdir.path + "/" + paths.dirname(ctx.build_file_path), site.path],
         progress_message = "Generating AIP static site with generator",
         executable = ctx.executable.generator,
     )
