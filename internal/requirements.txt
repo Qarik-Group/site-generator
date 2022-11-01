@@ -12,3 +12,5 @@ six==1.16.0
 types-Markdown==3.3.21
 types-PyYAML==6.0.7
 werkzeug==2.1.2
+importlib-metadata==5.0.0
+zipp==3.10.0
