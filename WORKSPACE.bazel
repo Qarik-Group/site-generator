@@ -1,4 +1,4 @@
-workspace(name = "site-generator")
+workspace(name = "rules_aip")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
@@ -22,13 +22,22 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.13.0.tar.gz",
 )
 
+load("@rules_python//python:repositories.bzl", "python_register_toolchains")
+
+python_register_toolchains(
+    name = "python39",
+    python_version = "3.9",
+)
+
+load("@python39//:defs.bzl", "interpreter")
 load("@rules_python//python:pip.bzl", "pip_parse")
 
 pip_parse(
-    name = "pip_deps",
+    name = "pip",
+    python_interpreter_target = interpreter,
     requirements = "//internal:requirements.txt",
 )
 
-load("@pip_deps//:requirements.bzl", "install_deps")
+load("@pip//:requirements.bzl", "install_deps")
 
 install_deps()
